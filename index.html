@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AquaNova</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Fondo animado */
+    .bg-animation {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.15);
+      filter: blur(80px);
+      animation: float 8s infinite alternate ease-in-out;
+    }
+
+    .circle1 {
+      width: 400px;
+      height: 400px;
+      top: 10%;
+      left: 10%;
+    }
+
+    .circle2 {
+      width: 350px;
+      height: 350px;
+      bottom: 10%;
+      right: 10%;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-30px);
+      }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.3);
+      z-index: 100;
+    }
+
+    nav h1 {
+      color: #00ffff;
+      font-size: 2rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffff;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero-text h2 {
+      color: #00ffff;
+      letter-spacing: 5px;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      margin-bottom: 25px;
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #00ffff;
+      color: #00ffff;
+    }
+
+    .btn-secondary:hover {
+      background: #00ffff;
+      color: black;
+    }
+
+    .hero img {
+      width: 400px;
+      border-radius: 30px;
+      box-shadow: 0 0 40px rgba(0,255,255,0.4);
+      transition: 0.5s;
+    }
+
+    .hero img:hover {
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 100px 50px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      color: #00ffff;
+    }
+
+    section p {
+      max-width: 900px;
+      margin: auto;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .cards {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 60px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 25px;
+      width: 300px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 25px rgba(0,255,255,0.3);
+    }
+
+    .card h3 {
+      margin: 20px 0;
+      color: #00ffff;
+    }
+
+    .price {
+      font-size: 2rem;
+      margin: 20px 0;
+      color: #00ffff;
+      font-weight: bold;
+    }
+
+    footer {
+      padding: 50px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    footer p {
+      margin: 10px 0;
+      color: #94a3b8;
+    }
+
+    @media(max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+      }
+
+      .hero img {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animation">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+  </div>
+
+  <nav>
+    <h1>AquaNova</h1>
+
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#problema">Problemática</a></li>
+      <li><a href="#funciona">Cómo funciona</a></li>
+      <li><a href="#compras">Compras</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="inicio">
+    <div class="hero-text">
+      <h2>INNOVACIÓN SUSTENTABLE</h2>
+
+      <h1>Filtración inteligente de aguas grises</h1>
+
+      <p>
+        AquaNova es un sistema biodegradable diseñado para reutilizar aguas grises domésticas mediante filtros ecológicos y accesibles.
+      </p>
+
+      <div class="buttons">
+        <button class="btn btn-primary">Comprar ahora</button>
+        <button class="btn btn-secondary">Ver más</button>
+      </div>
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=1200&auto=format&fit=crop" alt="Filtro ecológico">
+  </section>
+
+  <section id="problema">
+    <h2>El problema del agua</h2>
+
+    <p>
+      En México, millones de litros de aguas grises son desperdiciados diariamente.
+      AquaNova busca disminuir este impacto mediante sistemas ecológicos capaces de reutilizar agua proveniente de lavabos, duchas y lavadoras.
+    </p>
+  </section>
+
+  <section id="funciona">
+    <h2>¿Cómo funciona?</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>💧 Captación</h3>
+        <p>El sistema recibe aguas grises provenientes del hogar.</p>
+      </div>
+
+      <div class="card">
+        <h3>♻️ Filtración</h3>
+        <p>Los cartuchos biodegradables eliminan impurezas y residuos.</p>
+      </div>
+
+      <div class="card">
+        <h3>🌱 Reutilización</h3>
+        <p>El agua tratada puede utilizarse en riego y limpieza.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="compras">
+    <h2>Compra en línea</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Filtro básico</h3>
+        <p>Ideal para pequeños hogares.</p>
+        <div class="price">$499</div>
+        <button class="btn btn-primary">Comprar</button>
+      </div>
+
+      <div class="card">
+        <h3>Filtro familiar</h3>
+        <p>Mayor capacidad de filtración.</p>
+        <div class="price">$899</div>
+        <button class="btn btn-primary">Comprar</button>
+      </div>
+
+      <div class="card">
+        <h3>Cartuchos</h3>
+        <p>Repuestos biodegradables.</p>
+        <div class="price">$199</div>
+        <button class="btn btn-primary">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <h2>AquaNova</h2>
+    <p>📍 Tultitlán, Estado de México</p>
+    <p>📧 contacto@aquanova.com</p>
+    <p>🌐 Ventas principalmente en línea</p>
+    <p>© 2026 AquaNova — Proyecto escolar.</p>
+  </footer>
+
+  <script>
+    console.log("AquaNova website loaded");
+  </script>
+
+</body>
+</html>
